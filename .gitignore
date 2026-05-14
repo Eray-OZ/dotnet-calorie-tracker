@@ -1,0 +1,44 @@
+# --- .NET Spesifik ---
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+.base_line
+# Kullanıcıya özel User Secrets dosyaları
+core.*
+# NuGet paketleri (internet üzerinden her zaman geri yüklenebilir)
+*.nupkg
+packages/
+
+# --- IDE ve Editörler ---
+# VS Code ayarları
+.vscode/
+# Visual Studio ayarları
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- İşletim Sistemi ---
+# macOS özel dosyaları
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows özel dosyaları
+Thumbs.db
+ehthumbs.db
+
+# --- Veritabanı ve Güvenlik (Senin için en kritiği) ---
+# Hassas veriler ve API anahtarları
+appsettings.json
+appsettings.Development.json
+
+# Veritabanı dosyaları (Eğer SQLite kullanırsan veya dump alırsan)
+*.db
+*.db-shm
+*.db-wal
+*.sql
+*.mysql
+
+# --- Loglar ---
+*.log
