@@ -8,6 +8,7 @@ namespace CalorieTracker.Api.Controllers
     using CalorieTracker.Api.Data;
     using CalorieTracker.Api.Models;
     using CalorieTracker.Api.Services;
+    using Microsoft.EntityFrameworkCore;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -26,12 +27,12 @@ namespace CalorieTracker.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddCalorieEntry([FromBody] string mealPrompt, [FromQuery] string mealTitle)
+        public async Task<IActionResult> AddCalorieEntry([FromBody] CalorieEntry request)
         {
-            var calorieEntry = await _geminiService.CalculateCalories(mealPrompt, mealTitle);
+            var calorieEntry = await _geminiService.CalculateCalories(request.MealDescription, request.MealTitle);
 
             _context.CalorieEntries.Add(calorieEntry);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(calorieEntry);
            
@@ -39,6 +40,12 @@ namespace CalorieTracker.Api.Controllers
 
 
 
+        [HttpGet]
+        public async Task<IActionResult> GetCalorieEntries()
+        {
+            var entries = await _context.CalorieEntries.ToListAsync();
+            return Ok(entries);
+        }
 
 
     }

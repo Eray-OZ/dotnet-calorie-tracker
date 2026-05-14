@@ -32,8 +32,6 @@ namespace CalorieTracker.Api.Services
 
             public async Task<CalorieEntry> CalculateCalories(string mealPrompt, string mealTitle)
         {
-
-
             string prompt = promptBase + "\nMeal:" + mealPrompt;
 
             var response = await _client.Models.GenerateContentAsync(
