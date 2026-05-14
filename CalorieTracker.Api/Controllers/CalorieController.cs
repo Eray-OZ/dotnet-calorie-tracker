@@ -44,10 +44,29 @@ namespace CalorieTracker.Api.Controllers
         public async Task<IActionResult> GetCalorieEntries()
         {
             var entries = await _context.CalorieEntries
-            .Include(c => c.Items)
+            .Include(c => c.MealItems)
             .ToListAsync();
             return Ok(entries);
         }
+
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCalorieEntry(int id)
+        {
+            var entry = await _context.CalorieEntries.FindAsync(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            _context.CalorieEntries.Remove(entry);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
 
 
     }

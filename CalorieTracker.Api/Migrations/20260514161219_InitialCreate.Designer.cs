@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalorieTracker.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260514142520_InitialCreate")]
+    [Migration("20260514161219_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

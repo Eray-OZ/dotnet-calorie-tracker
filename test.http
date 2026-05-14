@@ -2,9 +2,11 @@ POST http://localhost:5097/api/calorie
 Content-Type: application/json
 
 {
-    "MealTitle": "Öğle Yemeği",
-    "MealDescription": "1 porsiyon tavuk sote ve yanına az miktar pilav"
+    "MealTitle": "Araöğün",
+    "MealDescription": "Bir avuç leblebi, 5 kavrulmuş fındık"
 }
+
+
 
 
 

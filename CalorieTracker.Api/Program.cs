@@ -23,6 +23,16 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton(new Client(apiKey: geminiApiKey));
 
 builder.Services.AddScoped<GeminiService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 
 
 var app = builder.Build();
@@ -33,6 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.UseCors("AllowAll");
 //app.UseHttpsRedirection();
 app.MapControllers();
 
