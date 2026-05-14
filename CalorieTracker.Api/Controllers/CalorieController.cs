@@ -43,7 +43,9 @@ namespace CalorieTracker.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCalorieEntries()
         {
-            var entries = await _context.CalorieEntries.ToListAsync();
+            var entries = await _context.CalorieEntries
+            .Include(c => c.Items)
+            .ToListAsync();
             return Ok(entries);
         }
 
