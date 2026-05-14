@@ -41,13 +41,15 @@ namespace CalorieTracker.Api.Services
 
             var content = response.Candidates?[0]?.Content?.Parts?[0].Text;
 
+            var mealItems = ExtractMealItemsFromContent(content);
 
-            var calories = ExtractCaloriesFromContent(content);
+            var calories = ExtractCaloriesFromList(mealItems);
 
             return new CalorieEntry
             {
                 MealTitle = mealTitle,
-                MealDescription = content,
+                MealItems = mealItems,
+                MealDescription = mealPrompt,
                 Calories = calories,
                 Date = DateTime.UtcNow
             };
@@ -58,35 +60,48 @@ namespace CalorieTracker.Api.Services
 
 
 
-
-
-
-    public int ExtractCaloriesFromContent(string content)
+    public int ExtractCaloriesFromList(List<MealItem> mealItems)
     {
  
-        var lines = content.Split('\n');
         int totalCalories = 0;
-        foreach (var line in lines)
+
+        foreach (var item in mealItems)
         {
-            var parts = line.Split(':');
-            if (parts.Length == 2)
-            {
-                var caloriePart = parts[1].Trim();
-                if (int.TryParse(caloriePart, out int calories))
-                {
-                    totalCalories += calories;
-                }
-            }
+            totalCalories += item.Calorie;
         }
+        
         return totalCalories; 
     }
 
 
 
+    public List<MealItem> ExtractMealItemsFromContent(string content)
+    {
+        var mealItems = new List<MealItem>();
+        var lines = content.Split('\n');
+        foreach (var line in lines)
+        {
+            var parts = line.Split(':');
+            if (parts.Length == 2)
+            {
+                var itemName = parts[0].Trim();
+                var caloriePart = parts[1].Trim();
+                if (int.TryParse(caloriePart, out int calories))
+                {
+                    mealItems.Add(new MealItem
+                    {
+                        ItemName = itemName,
+                        Calorie = calories
+                    });
+                }
+            }
+        }
+        return mealItems;
+
 
 
     }
 
-
+    }
 
 }

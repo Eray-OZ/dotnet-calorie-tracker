@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalorieTracker.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260514114621_InitialCreate")]
+    [Migration("20260514142520_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -50,6 +50,47 @@ namespace CalorieTracker.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CalorieEntries");
+                });
+
+            modelBuilder.Entity("CalorieTracker.Api.Models.MealItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Calorie")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EntryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntryId");
+
+                    b.ToTable("MealItems");
+                });
+
+            modelBuilder.Entity("CalorieTracker.Api.Models.MealItem", b =>
+                {
+                    b.HasOne("CalorieTracker.Api.Models.CalorieEntry", "CalorieEntry")
+                        .WithMany("MealItems")
+                        .HasForeignKey("EntryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CalorieEntry");
+                });
+
+            modelBuilder.Entity("CalorieTracker.Api.Models.CalorieEntry", b =>
+                {
+                    b.Navigation("MealItems");
                 });
 #pragma warning restore 612, 618
         }
