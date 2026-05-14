@@ -41,6 +41,11 @@ namespace CalorieTracker.Api.Services
 
             var content = response.Candidates?[0]?.Content?.Parts?[0].Text;
 
+            if (string.IsNullOrEmpty(content))
+            {
+                throw new Exception("Failed to get a valid response from Gemini API.");
+            }
+
             var mealItems = ExtractMealItemsFromContent(content);
 
             var calories = ExtractCaloriesFromList(mealItems);

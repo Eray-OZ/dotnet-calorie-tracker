@@ -24,5 +24,4 @@ namespace CalorieTracker.Api.Data
 }
 
 
-
 }

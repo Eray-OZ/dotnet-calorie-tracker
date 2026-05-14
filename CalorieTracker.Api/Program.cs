@@ -24,6 +24,7 @@ builder.Services.AddSingleton(new Client(apiKey: geminiApiKey));
 
 builder.Services.AddScoped<GeminiService>();
 
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
