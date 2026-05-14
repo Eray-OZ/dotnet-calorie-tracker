@@ -1,0 +1,6 @@
+POST http://localhost:5097/api/calorie
+Content-Type: application/json
+{
+"mealPrompt": "Bir sandviç; içinde 3 domates, 3 domates salatalık, 3 dilim peynir, ekmeği beyaz sandviç ekmeği, kaç kalori?",
+"mealTitle": "Kahvaltı"
+}
