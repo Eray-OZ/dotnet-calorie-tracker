@@ -5,12 +5,7 @@ export default function Header() {
         VitalTrack
       </div>
       <div className="flex items-center gap-md">
-        <button className="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">
-          <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
-        </button>
-        <button className="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">
-          <span className="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-        </button>
+
       </div>
     </header>
   );

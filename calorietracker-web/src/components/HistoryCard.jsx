@@ -10,17 +10,33 @@ export default function HistoryCard() {
 
 
   const [entries, setEntries] = useState([]);
-
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const fetchEntries = async () => {
       const data = await api.getCalorieEntries();
       data.sort((a, b) => new Date(b.date) - new Date(a.date));
       setEntries(data);
     };
-    fetchEntries();
+    
+    try {
+      fetchEntries();
+    } catch {
+      console.error(error);
+    } finally {
+      setLoading(false)
+    }
+
   }, [entries]);
 
+
+
+
+  const deleteEntry = async (id) => {
+    await api.deleteEntry(id);
+    setEntries(prevEntries => prevEntries.filter(entry => entry.id !== id));
+  }
 
 
 
@@ -34,7 +50,9 @@ export default function HistoryCard() {
           <div key={entry.id}>
             <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">
               {new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}
+              <span className="material-symbols-outlined" data-icon="delete"><button onClick={() => deleteEntry(entry.id)}>delete</button></span>
             </h3>
+            
             <div className="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-surface-variant overflow-hidden">
               <div className="border-b border-surface-variant last:border-b-0 p-lg">
                 <div className="flex justify-between items-center mb-md">

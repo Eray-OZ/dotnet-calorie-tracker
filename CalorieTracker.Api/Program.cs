@@ -1,8 +1,7 @@
 using CalorieTracker.Api.Data;
 using CalorieTracker.Api.Services;
-using Microsoft.EntityFrameworkCore;
 using Google.GenAI;
-
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +15,7 @@ var geminiApiKey = builder.Configuration.GetConnectionString("GeminiConnection")
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 
