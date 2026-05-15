@@ -5,7 +5,7 @@ import { api } from "../api";
 
 
 
-export default function HistoryCard() {
+export default function HistoryCard({ username }) {
 
 
 
@@ -16,7 +16,7 @@ export default function HistoryCard() {
   useEffect(() => {
     setLoading(true)
     const fetchEntries = async () => {
-      const data = await api.getCalorieEntries();
+      const data = await api.getCalorieEntries(username);
       data.sort((a, b) => new Date(b.date) - new Date(a.date));
       setEntries(data);
     };

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 
 
-export default function MealLogForm() {
+export default function MealLogForm({ username }) {
 
 
 
@@ -28,7 +28,7 @@ export default function MealLogForm() {
       await api.addCalorieEntry({
         MealTitle: mealType,
         MealDescription: mealDescription,
-      });
+      }, username);
       alert("Meal added successfully!");
       mealInput.value = "";
       mealTypeInput.value = "";

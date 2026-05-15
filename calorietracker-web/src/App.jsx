@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import Header from './components/Header';
 import MealLogForm from './components/MealLogForm';
 import HistoryCard from './components/HistoryCard';
+import LoginPage from './components/LoginPage';
 
 function App() {
+  const [user, setUser] = useState(() => localStorage.getItem('vitaltrack_user'));
+
+  const handleLogout = () => {
+    localStorage.removeItem('vitaltrack_user');
+    setUser(null);
+  };
+
+  if (!user) {
+    return <LoginPage onLogin={setUser} />;
+  }
+
   return (
     <>
-      <Header />
+      <Header username={user} onLogout={handleLogout} />
       <main className="max-w-4xl mx-auto px-container-margin-mobile md:px-container-margin-desktop py-lg space-y-xl">
         {/* Header Section */}
         <div>
@@ -14,10 +27,10 @@ function App() {
         </div>
 
         {/* Logging Interface */}
-        <MealLogForm />
+        <MealLogForm username={user} />
 
         {/* History Table */}
-        <HistoryCard />
+        <HistoryCard username={user} />
       </main>
     </>
   );

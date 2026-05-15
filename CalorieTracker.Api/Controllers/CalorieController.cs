@@ -31,6 +31,8 @@ namespace CalorieTracker.Api.Controllers
         {
             var calorieEntry = await _geminiService.CalculateCalories(request.MealDescription, request.MealTitle);
 
+            calorieEntry.UserId = request.UserId ?? "default";
+
             _context.CalorieEntries.Add(calorieEntry);
             await _context.SaveChangesAsync();
 
@@ -41,10 +43,11 @@ namespace CalorieTracker.Api.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetCalorieEntries()
+        public async Task<IActionResult> GetCalorieEntries([FromQuery] string userId = "default")
         {
             var entries = await _context.CalorieEntries
             .Include(c => c.MealItems)
+            .Where(c => c.UserId == userId)
             .ToListAsync();
             return Ok(entries);
         }
