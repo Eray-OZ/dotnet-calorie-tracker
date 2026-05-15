@@ -1,7 +1,6 @@
 import Header from './components/Header';
 import MealLogForm from './components/MealLogForm';
 import HistoryCard from './components/HistoryCard';
-import BottomNav from './components/BottomNav';
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
         {/* History Table */}
         <HistoryCard />
       </main>
-      <BottomNav />
     </>
   );
 }
