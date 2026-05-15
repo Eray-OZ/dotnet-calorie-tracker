@@ -10,7 +10,8 @@ export default function HistoryCard() {
 
 
   const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     setLoading(true)
@@ -23,19 +24,26 @@ export default function HistoryCard() {
     try {
       fetchEntries();
     } catch {
-      console.error(error);
+      console.error("Error fetching entries:", error);
     } finally {
       setLoading(false)
     }
 
-  }, [entries]);
+  }, []);
 
 
 
 
   const deleteEntry = async (id) => {
-    await api.deleteEntry(id);
-    setEntries(prevEntries => prevEntries.filter(entry => entry.id !== id));
+    setDeletingId(id);
+    try {
+      await api.deleteEntry(id);
+      setEntries(prevEntries => prevEntries.filter(entry => entry.id !== id));
+    } catch (error) {
+      console.error("Error deleting entry:", error);
+    } finally {
+      setDeletingId(null);
+    }
   }
 
 
@@ -48,9 +56,15 @@ export default function HistoryCard() {
 
         {entries.map(entry => (
           <div key={entry.id}>
-            <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">
-              {new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}
-              <span className="material-symbols-outlined" data-icon="delete"><button onClick={() => deleteEntry(entry.id)}>delete</button></span>
+            <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm flex justify-between items-center">
+              <span>{new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}</span>
+              {deletingId === entry.id ? (
+                <span className="material-symbols-outlined animate-spin opacity-70">progress_activity</span>
+              ) : (
+                <button onClick={() => deleteEntry(entry.id)} className="hover:opacity-70 transition-opacity flex items-center">
+                  <span className="material-symbols-outlined" data-icon="delete">delete</span>
+                </button>
+              )}
             </h3>
             
             <div className="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-surface-variant overflow-hidden">
