@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 
 
-export default function MealLogForm({ username }) {
+export default function MealLogForm({ username, onMealAdded }) {
 
 
 
@@ -32,6 +32,7 @@ export default function MealLogForm({ username }) {
       alert("Meal added successfully!");
       mealInput.value = "";
       mealTypeInput.value = "";
+      if (onMealAdded) onMealAdded();
     } catch (error) {
       console.error("Error:", error);
       alert(error);

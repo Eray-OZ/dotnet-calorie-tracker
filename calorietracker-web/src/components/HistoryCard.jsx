@@ -5,7 +5,7 @@ import { api } from "../api";
 
 
 
-export default function HistoryCard({ username }) {
+export default function HistoryCard({ username, refreshKey }) {
 
 
 
@@ -29,7 +29,7 @@ export default function HistoryCard({ username }) {
       setLoading(false)
     }
 
-  }, []);
+  }, [refreshKey]);
 
 
 

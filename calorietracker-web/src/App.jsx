@@ -6,6 +6,9 @@ import LoginPage from './components/LoginPage';
 
 function App() {
   const [user, setUser] = useState(() => localStorage.getItem('vitaltrack_user'));
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleMealAdded = () => setRefreshKey(prev => prev + 1);
 
   const handleLogout = () => {
     localStorage.removeItem('vitaltrack_user');
@@ -27,10 +30,10 @@ function App() {
         </div>
 
         {/* Logging Interface */}
-        <MealLogForm username={user} />
+        <MealLogForm username={user} onMealAdded={handleMealAdded} />
 
         {/* History Table */}
-        <HistoryCard username={user} />
+        <HistoryCard username={user} refreshKey={refreshKey} />
       </main>
     </>
   );
