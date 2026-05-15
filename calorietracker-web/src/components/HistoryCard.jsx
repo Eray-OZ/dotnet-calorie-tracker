@@ -48,6 +48,29 @@ export default function HistoryCard({ username, refreshKey }) {
 
 
 
+  if (loading) {
+    return (
+      <section>
+        <h2 className="font-headline-sm text-headline-sm text-on-surface mb-md">History</h2>
+        <div className="space-y-lg">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="bg-surface-container-lowest rounded-xl border border-surface-variant p-lg animate-pulse">
+              <div className="flex justify-between items-center mb-md">
+                <div className="h-3 bg-surface-variant rounded w-24"></div>
+                <div className="h-4 w-4 bg-surface-variant rounded"></div>
+              </div>
+              <div className="space-y-sm">
+                <div className="h-3 bg-surface-variant rounded w-3/4"></div>
+                <div className="h-3 bg-surface-variant rounded w-1/2"></div>
+                <div className="h-3 bg-surface-variant rounded w-2/3"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section>
       <h2 className="font-headline-sm text-headline-sm text-on-surface mb-md">History</h2>
