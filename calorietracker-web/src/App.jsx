@@ -10,8 +10,8 @@ function App() {
       <main className="max-w-4xl mx-auto px-container-margin-mobile md:px-container-margin-desktop py-lg space-y-xl">
         {/* Header Section */}
         <div>
-          <h1 className="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">Günlük Özet</h1>
-          <p className="font-body-md text-body-md text-on-surface-variant mt-sm">Bugün ne yediğinizi takip edin.</p>
+          <h1 className="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">Daily Summary</h1>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-sm">Track what you eat today.</p>
         </div>
 
         {/* Logging Interface */}

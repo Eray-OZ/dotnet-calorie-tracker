@@ -19,14 +19,14 @@ export default function HistoryCard() {
       setEntries(data);
     };
     fetchEntries();
-  }, []);
+  }, [entries]);
 
 
 
 
   return (
     <section>
-      <h2 className="font-headline-sm text-headline-sm text-on-surface mb-md">Geçmiş</h2>
+      <h2 className="font-headline-sm text-headline-sm text-on-surface mb-md">History</h2>
       <div className="space-y-lg">
         {/* Date Group */}
 
@@ -52,7 +52,7 @@ export default function HistoryCard() {
                   ))}
                 </ul>
                 <div className="flex justify-between items-center pt-sm border-t border-surface-variant">
-                  <span className="font-label-md text-label-md text-on-surface">Toplam Kalori</span>
+                  <span className="font-label-md text-label-md text-on-surface">Total Calories</span>
                   <span className="font-headline-sm text-headline-sm text-primary">{entry.calories} kcal</span>
                 </div>
               </div>
