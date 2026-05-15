@@ -32,6 +32,7 @@ ehthumbs.db
 # Hassas veriler ve API anahtarları
 appsettings.json
 appsettings.Development.json
+.env
 
 # Veritabanı dosyaları (Eğer SQLite kullanırsan veya dump alırsan)
 *.db
